@@ -1,0 +1,49 @@
+{
+  "name": "ecommerce-server",
+  "version": "1.0.0",
+  "description": "Backend API for an e-commerce platform built with Node.js, Express, PostgreSQL, TypeScript, and other modern backend technologies. ",
+  "keywords": [
+    "ecommerce",
+    "express",
+    "typescript",
+    "node",
+    "zod"
+  ],
+  "homepage": "https://github.com/ProgramadorXP/E-commerce_Backend#readme",
+  "bugs": {
+    "url": "https://github.com/ProgramadorXP/E-commerce_Backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProgramadorXP/E-commerce_Backend.git"
+  },
+  "license": "ISC",
+  "author": "Jonhatan Villalobos Parra",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "lint": "eslint 'src/**/*.ts'"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "7.2.0",
+    "@prisma/client": "7.2.0",
+    "chalk": "5.6.2",
+    "dotenv": "17.2.3",
+    "express": "5.2.1",
+    "pg": "8.16.3",
+    "zod": "4.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.6",
+    "@types/node": "25.0.3",
+    "@types/pg": "8.16.0",
+    "eslint": "9.39.2",
+    "prettier": "3.7.4",
+    "prisma": "7.2.0",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  }
+}
