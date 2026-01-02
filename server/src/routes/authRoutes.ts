@@ -5,6 +5,7 @@ import {
   UserLoginSchema,
 } from '../schemas/userSchemas';
 import { AuthController } from '../controllers/AuthController';
+import { authenticate } from '../middlewares/authMiddleware';
 
 const router = Router();
 
@@ -15,5 +16,7 @@ router.post(
 );
 
 router.post('/login', validateData(UserLoginSchema), AuthController.login);
+
+router.get('/me', authenticate, AuthController.getMe);
 
 export default router;

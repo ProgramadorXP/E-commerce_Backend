@@ -1,5 +1,6 @@
 import argon2 from 'argon2';
 import { prisma } from '../lib/prisma';
+import jwt from 'jsonwebtoken';
 import { UserRegistrationType, UserLoginType } from '../schemas/userSchemas';
 import {
   ConflictError,
@@ -44,17 +45,28 @@ export class AuthService {
         password: hashedPassword,
         role: { connect: { id: role!.id } },
       },
-
       // select what we want to return
       select: {
         id: true,
         username: true,
         email: true,
+        role: {
+          select: {
+            name: true,
+          },
+        },
         createdAt: true,
       },
     });
 
-    return newUser;
+    // Generate token
+    const token = jwt.sign(
+      { id: newUser.id, role: newUser.role.name },
+      process.env.JWT_SECRET!,
+      { expiresIn: '10m' },
+    );
+
+    return { user: newUser, token };
   }
 
   static async loginUser(userData: UserLoginType) {
@@ -79,6 +91,25 @@ export class AuthService {
     }
 
     const { password: _, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+
+    const userWithRole = await prisma.user.findUnique({
+      where: { id: user.id },
+      select: {
+        role: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+
+    // Generate token
+    const token = jwt.sign(
+      { id: user.id, role: userWithRole?.role.name },
+      process.env.JWT_SECRET!,
+      { expiresIn: '10m' },
+    );
+
+    return { user: userWithoutPassword, token };
   }
 }

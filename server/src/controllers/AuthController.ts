@@ -10,11 +10,11 @@ export class AuthController {
   ) => {
     try {
       // call business logic
-      const user = await AuthService.registerUser(req.body);
+      const { user, token } = await AuthService.registerUser(req.body);
 
       res
         .status(201)
-        .json({ message: 'User created successfully', data: user });
+        .json({ message: 'User created successfully', data: user, token });
     } catch (error) {
       next(error);
     }
@@ -27,11 +27,22 @@ export class AuthController {
   ) => {
     try {
       // call business logic
-      const user = await AuthService.loginUser(req.body);
+      const { user, token } = await AuthService.loginUser(req.body);
 
       res
         .status(200)
-        .json({ message: 'User logged in successfully', data: user });
+        .json({ message: 'User logged in successfully', data: user, token });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  static getMe = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      // req.user is populated by the authenticate middleware
+      res.status(200).json({
+        data: req.user,
+      });
     } catch (error) {
       next(error);
     }
