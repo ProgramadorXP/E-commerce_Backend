@@ -25,6 +25,22 @@ export const UserRegistrationSchema = z.strictObject({
   params: z.object({}).optional(),
 });
 
+export const UserLoginSchema = z.strictObject({
+  body: z.object({
+    identifier: z.coerce
+      .string()
+      .nonempty({ error: 'Username or email is required' }),
+    password: z.coerce
+      .string()
+      .min(8)
+      .nonempty({ error: 'Password is required' }),
+  }),
+  query: z.object({}).optional(),
+  params: z.object({}).optional(),
+});
+
 export type UserRegistrationType = z.infer<
   typeof UserRegistrationSchema
 >['body'];
+
+export type UserLoginType = z.infer<typeof UserLoginSchema>['body'];

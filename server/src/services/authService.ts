@@ -1,8 +1,11 @@
 import argon2 from 'argon2';
 import { prisma } from '../lib/prisma';
-import { UserRegistrationType } from '../schemas/userSchemas';
-import { ConflictError, NotFoundError } from '../utils/errors';
-
+import { UserRegistrationType, UserLoginType } from '../schemas/userSchemas';
+import {
+  ConflictError,
+  NotFoundError,
+  UnauthorizedError,
+} from '../utils/errors';
 export class AuthService {
   static async registerUser(userData: UserRegistrationType) {
     const { username, email, password } = userData;
@@ -52,5 +55,30 @@ export class AuthService {
     });
 
     return newUser;
+  }
+
+  static async loginUser(userData: UserLoginType) {
+    const { identifier, password } = userData;
+
+    // Check if user or email exists
+    const user = await prisma.user.findFirst({
+      where: {
+        OR: [{ username: identifier }, { email: identifier }],
+      },
+    });
+    if (!user) {
+      // throw error
+      throw new UnauthorizedError('Invalid credentials');
+    }
+
+    // Check if password is correct
+    const isPasswordValid = await argon2.verify(user.password, password);
+    if (!isPasswordValid) {
+      // throw error
+      throw new UnauthorizedError('Invalid credentials');
+    }
+
+    const { password: _, ...userWithoutPassword } = user;
+    return userWithoutPassword;
   }
 }
