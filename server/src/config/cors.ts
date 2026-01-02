@@ -7,7 +7,7 @@ export const corsOptions: CorsOptions = {
     if (!origin || whitelist.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Error de CORS: Origen no permitido'));
+      callback(new Error('CORS Error: Origin not allowed'));
     }
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
