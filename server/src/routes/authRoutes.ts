@@ -6,6 +6,7 @@ import {
 } from '../schemas/userSchemas';
 import { AuthController } from '../controllers/AuthController';
 import { authenticate } from '../middlewares/authMiddleware';
+import { authorizeRole } from '../middlewares/roleMiddleware';
 
 const router = Router();
 
@@ -18,5 +19,10 @@ router.post(
 router.post('/login', validateData(UserLoginSchema), AuthController.login);
 
 router.get('/me', authenticate, AuthController.getMe);
+
+// Example of a route only for admins
+router.get('/admin', authenticate, authorizeRole(['admin']), (req, res) => {
+  res.json({ message: 'Welcome, Admin!' });
+});
 
 export default router;
