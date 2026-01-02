@@ -7,16 +7,23 @@ import {
 import { AuthController } from '../controllers/AuthController';
 import { authenticate } from '../middlewares/authMiddleware';
 import { authorizeRole } from '../middlewares/roleMiddleware';
+import { authRateLimiter } from '../middlewares/rateLimitMiddleware';
 
 const router = Router();
 
 router.post(
   '/register',
+  authRateLimiter,
   validateData(UserRegistrationSchema),
   AuthController.createAccount,
 );
 
-router.post('/login', validateData(UserLoginSchema), AuthController.login);
+router.post(
+  '/login',
+  authRateLimiter,
+  validateData(UserLoginSchema),
+  AuthController.login,
+);
 
 router.get('/me', authenticate, AuthController.getMe);
 
