@@ -1,16 +1,16 @@
 import express from 'express';
+import authRoutes from './routes/authRoutes';
 import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use('/api/auth', authRoutes);
 
-// Global error handler (should be after routes)
+// Error handler
 app.use(errorHandler);
 
 export default app;
