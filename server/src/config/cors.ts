@@ -3,7 +3,7 @@ import { env } from './config';
 
 export const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
-    const whitelist = [env.FRONTEND_URL];
+    const whitelist = [env.FRONTEND_URL, `http://localhost:${env.PORT}`];
 
     if (!origin || whitelist.includes(origin)) {
       callback(null, true);
