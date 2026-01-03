@@ -1,6 +1,7 @@
 import argon2 from 'argon2';
 import { prisma } from '../lib/prisma';
 import jwt from 'jsonwebtoken';
+import { env } from '../config/config';
 import { UserRegistrationType, UserLoginType } from '../schemas/userSchemas';
 import {
   ConflictError,
@@ -62,7 +63,7 @@ export class AuthService {
     // Generate token
     const token = jwt.sign(
       { id: newUser.id, role: newUser.role.name },
-      process.env.JWT_SECRET!,
+      env.JWT_SECRET,
       { expiresIn: '10m' },
     );
 
@@ -106,7 +107,7 @@ export class AuthService {
     // Generate token
     const token = jwt.sign(
       { id: user.id, role: userWithRole?.role.name },
-      process.env.JWT_SECRET!,
+      env.JWT_SECRET,
       { expiresIn: '10m' },
     );
 

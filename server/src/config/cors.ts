@@ -1,8 +1,9 @@
 import { CorsOptions } from 'cors';
+import { env } from './config';
 
 export const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
-    const whitelist = [process.env.FRONTEND_URL];
+    const whitelist = [env.FRONTEND_URL];
 
     if (!origin || whitelist.includes(origin)) {
       callback(null, true);
