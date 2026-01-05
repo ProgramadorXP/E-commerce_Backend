@@ -10,6 +10,7 @@ import { stream } from './utils/logger';
 import authRoutes from './routes/authRoutes';
 import { errorHandler } from './middlewares/errorHandler';
 import { generalRateLimiter } from './middlewares/rateLimitMiddleware';
+import { compressionMiddleware } from './middlewares/compressionMiddleware';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Security and Logging
 app.use(helmet());
 app.use(cors(corsOptions));
+app.use(compressionMiddleware);
 app.use(
   morgan(env.NODE_ENV === 'development' ? 'dev' : 'combined', { stream }),
 );
