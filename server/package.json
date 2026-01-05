@@ -26,7 +26,14 @@
     "start": "node dist/server.js",
     "dev": "tsx watch src/server.ts",
     "lint": "eslint 'src/**/*.ts'",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles",
+    "prepare": "cd .. && husky server/.husky"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.2.0",
@@ -60,7 +67,9 @@
     "@types/swagger-jsdoc": "6.0.4",
     "@types/swagger-ui-express": "4.1.8",
     "eslint": "9.39.2",
+    "husky": "9.1.7",
     "jest": "30.2.0",
+    "lint-staged": "16.2.7",
     "prettier": "3.7.4",
     "prisma": "7.2.0",
     "supertest": "7.1.4",
