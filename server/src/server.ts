@@ -1,6 +1,6 @@
+import chalk from 'chalk';
 import app from './app';
 import { env } from './config/config';
-import chalk from 'chalk';
 import { prisma } from './lib/prisma';
 
 const server = app.listen(env.PORT, () => {

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { UserRegistrationType, UserLoginType } from '../schemas/userSchemas';
-import { AuthService } from '../services/authService';
+import { UserRegistrationType, UserLoginType } from '@/schemas/userSchemas';
+import { AuthService } from '@/services/authService';
 
 export class AuthController {
   static createAccount = async (

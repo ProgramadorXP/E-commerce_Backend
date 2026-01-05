@@ -1,13 +1,10 @@
 import { Router } from 'express';
-import { validateData } from '../middlewares/validationMiddleware';
-import {
-  UserRegistrationSchema,
-  UserLoginSchema,
-} from '../schemas/userSchemas';
-import { AuthController } from '../controllers/AuthController';
-import { authenticate } from '../middlewares/authMiddleware';
-import { authorizeRole } from '../middlewares/roleMiddleware';
-import { authRateLimiter } from '../middlewares/rateLimitMiddleware';
+import { validateData } from '@/middlewares/validationMiddleware';
+import { UserRegistrationSchema, UserLoginSchema } from '@/schemas/userSchemas';
+import { AuthController } from '@/controllers/AuthController';
+import { authenticate } from '@/middlewares/authMiddleware';
+import { authorizeRole } from '@/middlewares/roleMiddleware';
+import { authRateLimiter } from '@/middlewares/rateLimitMiddleware';
 
 const router = Router();
 

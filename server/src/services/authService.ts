@@ -1,13 +1,13 @@
 import argon2 from 'argon2';
-import { prisma } from '../lib/prisma';
 import jwt from 'jsonwebtoken';
-import { env } from '../config/config';
-import { UserRegistrationType, UserLoginType } from '../schemas/userSchemas';
+import { prisma } from '@/lib/prisma';
+import { env } from '@/config/config';
+import { UserRegistrationType, UserLoginType } from '@/schemas/userSchemas';
 import {
   ConflictError,
   NotFoundError,
   UnauthorizedError,
-} from '../utils/errors';
+} from '@/utils/errors';
 export class AuthService {
   static async registerUser(userData: UserRegistrationType) {
     const { username, email, password } = userData;

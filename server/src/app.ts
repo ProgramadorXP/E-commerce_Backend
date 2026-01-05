@@ -3,14 +3,14 @@ import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
-import { env } from './config/config';
-import { corsOptions } from './config/cors';
-import { swaggerSpec } from './config/swagger';
-import { stream } from './utils/logger';
-import authRoutes from './routes/authRoutes';
-import { errorHandler } from './middlewares/errorHandler';
-import { generalRateLimiter } from './middlewares/rateLimitMiddleware';
-import { compressionMiddleware } from './middlewares/compressionMiddleware';
+import { env } from '@/config/config';
+import { corsOptions } from '@/config/cors';
+import { swaggerSpec } from '@/config/swagger';
+import { stream } from '@/utils/logger';
+import authRoutes from '@/routes/authRoutes';
+import { errorHandler } from '@/middlewares/errorHandler';
+import { generalRateLimiter } from '@/middlewares/rateLimitMiddleware';
+import { compressionMiddleware } from '@/middlewares/compressionMiddleware';
 
 const app = express();
 

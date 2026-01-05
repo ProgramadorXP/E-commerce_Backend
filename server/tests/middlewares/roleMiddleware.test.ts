@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { authorizeRole } from '../../src/middlewares/roleMiddleware';
-import { UnauthorizedError } from '../../src/utils/errors';
+import { authorizeRole } from '@/middlewares/roleMiddleware';
+import { UnauthorizedError } from '@/utils/errors';
 
 describe('Role Middleware', () => {
   let mockRequest: Partial<Request>;

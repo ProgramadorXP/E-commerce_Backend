@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { authenticate } from '../../src/middlewares/authMiddleware';
-import { UnauthorizedError } from '../../src/utils/errors';
-import { env } from '../../src/config/config';
+import { authenticate } from '@/middlewares/authMiddleware';
+import { UnauthorizedError } from '@/utils/errors';
+import { env } from '@/config/config';
 
 jest.mock('jsonwebtoken');
 

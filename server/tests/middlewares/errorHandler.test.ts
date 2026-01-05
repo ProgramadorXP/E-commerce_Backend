@@ -1,14 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import { errorHandler } from '../../src/middlewares/errorHandler';
-import {
-  AppError,
-  UnauthorizedError,
-  ConflictError,
-} from '../../src/utils/errors';
-import logger from '../../src/utils/logger';
+import { errorHandler } from '@/middlewares/errorHandler';
+import { AppError, UnauthorizedError, ConflictError } from '@/utils/errors';
+import logger from '@/utils/logger';
 
 // Mock logger to avoid console output and file writing during tests
-jest.mock('../../src/utils/logger', () => ({
+jest.mock('@/utils/logger', () => ({
   warn: jest.fn(),
   error: jest.fn(),
 }));
